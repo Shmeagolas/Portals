@@ -15,6 +15,8 @@ public class PortalLink : MonoBehaviour
 
 	private string[,] pairs;
 
+	public int mostDoors = 4;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -52,19 +54,23 @@ public class PortalLink : MonoBehaviour
 			int randPort;
 			for (int i = 0; i < len; i++)
 			{
-				
+				int iterations = 0;
 				do
 				{
+					iterations++; //niche issue if the final 4 doors were all from same room
 					randPort = Random.Range(1, pairListString.Count - 1);
-				} while (pairListString.Count > 2 && pairListString[0].Substring(1, 1) == pairListString[randPort].Substring(1, 1));
+					//loops if found random door from the same room
+				} while (pairListString.Count > 2 && iterations <= mostDoors && pairListString[0].Substring(1, 1) == pairListString[randPort].Substring(1, 1));
 
-
+				if (iterations > mostDoors) break;
+				//adds paired rooms to paired list
 				pairs[0, i] = pairListString[0];
 				pairs[1, i] = pairListString[randPort];
+				//removes rooms from temp pair list
 				pairListString.Remove(pairListString[randPort]);
 				pairListString.Remove(pairListString[0]);
 			}
-
+			//loops if the last 2 doors were from the same room
 		} while(pairs[0, len - 1].Substring(1, 1) == pairs[1, len - 1].Substring(1, 1)); 
 
 
