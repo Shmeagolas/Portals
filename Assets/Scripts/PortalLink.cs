@@ -98,8 +98,7 @@ public class PortalLink : MonoBehaviour
 
 		int randPort;
 
-		do //loops if last two portals end up being from same room
-		{
+
 			//finds matches for single room portals
 			for(int i = 0; i < singleRoom.Count; i++)
 			{
@@ -110,7 +109,7 @@ public class PortalLink : MonoBehaviour
 				} while (pairs[0, i + (treeList.Count / 2)].Substring(1, 1) == nonTreeList[randPort].Substring(1, 1));
 
 				pairs[1, i + (treeList.Count / 2)] = nonTreeList[randPort];
-				Debug.Log("remove????");
+				
 				nonTreeList.RemoveAt(randPort);
 			}
 
@@ -135,7 +134,6 @@ public class PortalLink : MonoBehaviour
 				tempNonTree.RemoveAt(0);
 			}
 
-		} while (pairs[0, len - 1].Substring(1, 1) == pairs[1, len - 1].Substring(1, 1));
 
 		//creates list of gameobject portals thats sorted
 		/*for (int i = 0; i < portalListString.Count; i++)
