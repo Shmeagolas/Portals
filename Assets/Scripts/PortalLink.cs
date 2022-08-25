@@ -105,10 +105,12 @@ public class PortalLink : MonoBehaviour
 			{
 				do
 				{ 
-					randPort = Random.Range(0, nonTreeList.Count - 1);
+					randPort = Random.Range(1, nonTreeList.Count - 1);
+					Debug.Log(i + "     " + randPort);
+				} while (pairs[0, i + (treeList.Count / 2)].Substring(1, 1) == nonTreeList[randPort].Substring(1, 1));
 
-				} while (pairs[0, i].Substring(1, 1) == nonTreeList[randPort].Substring(1, 1));
 				pairs[1, i + (treeList.Count / 2)] = nonTreeList[randPort];
+				Debug.Log("remove????");
 				nonTreeList.RemoveAt(randPort);
 			}
 
@@ -146,12 +148,28 @@ public class PortalLink : MonoBehaviour
 				}
 			}
 		}*/
-		int ten = pairs.GetLength(1);
-		ten += 10;
-		for (int i = 0; i < pairs.GetLength(1); i++)
+		Debug.Log("149");
+		/*for (int i = 0; i < len; i++)
 		{
+			for (int j = 0; j < tempArray.Count(); j++)
+			{
+				Portal P1 = new Portal();
+				Portal P2 = new Portal();
+				if(pairs[0,i] == tempArray[j].gameObject.name + " (Portal)")
+				{
+					P1 = tempArray[j];
+				}
+				else if(pairs[1, i] == tempArray[j].gameObject.name + " (Portal)")
+				{
+					P2 = tempArray[j];
+				}
 
-		}
+				P1.linkedPortal = P2;
+				P2.linkedPortal = P1;
+				Debug.Log("linked");
+			}
+		}*/
+		
 
 
 
