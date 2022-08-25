@@ -317,4 +317,11 @@ public class Portal : MonoBehaviour {
             linkedPortal.linkedPortal = this;
         }
     }
+
+	public void Rotate()
+    {
+        Vector3 newRotation = new Vector3(0, 180 + this.transform.localRotation.eulerAngles.y, 0);
+        transform.eulerAngles = newRotation;
+    }
 }
+    

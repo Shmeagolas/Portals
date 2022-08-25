@@ -14,11 +14,12 @@ public class PortalLink : MonoBehaviour
 	List<Portal> portalList = new();
 
 	private string[,] pairs;
+	
 
 	public int mostDoors = 4;
 
 	// Start is called before the first frame update
-	void Start()
+	object Start()
 	{
 		//finds all portals
 		tempArray = GameObject.FindObjectsOfType<Portal>();
@@ -104,8 +105,7 @@ public class PortalLink : MonoBehaviour
 			{
 				do
 				{ 
-					randPort = Random.Range(1, nonTreeList.Count - 1);
-					Debug.Log(i + "     " + randPort);
+					randPort = Random.Range(1, nonTreeList.Count - 1);				
 				} while (pairs[0, i + (treeList.Count / 2)].Substring(1, 1) == nonTreeList[randPort].Substring(1, 1));
 
 				pairs[1, i + (treeList.Count / 2)] = nonTreeList[randPort];
@@ -135,39 +135,30 @@ public class PortalLink : MonoBehaviour
 			}
 
 
-		//creates list of gameobject portals thats sorted
-		/*for (int i = 0; i < portalListString.Count; i++)
-		{
-			for (int j = 0; j < tempArray.Count(); j++)
-			{			
-				if (portalListString[i] == tempArray[j].gameObject.name + " (Portal)")
-				{
-					portalList.Add(tempArray[j]);				
-				}
-			}
-		}*/
-		Debug.Log("149");
-		/*for (int i = 0; i < len; i++)
-		{
-			for (int j = 0; j < tempArray.Count(); j++)
-			{
-				Portal P1 = new Portal();
-				Portal P2 = new Portal();
-				if(pairs[0,i] == tempArray[j].gameObject.name + " (Portal)")
-				{
-					P1 = tempArray[j];
-				}
-				else if(pairs[1, i] == tempArray[j].gameObject.name + " (Portal)")
-				{
-					P2 = tempArray[j];
-				}
 
-				P1.linkedPortal = P2;
-				P2.linkedPortal = P1;
-				Debug.Log("linked");
+		Portal[,] objectPairs = new Portal[pairs.GetLength(0), pairs.GetLength(1)];
+
+		for (int i = 0; i < pairs.GetLength(0); i++)
+		{
+			for(int j = 0; j < pairs.GetLength(1); j++)
+			{
+				for (int z = 0; z < tempArray.Count(); z++)
+				{
+					if (pairs[i, j] == tempArray[z].gameObject.name + " (Portal)")
+					{
+						objectPairs[i, j] = tempArray[z];
+					}
+				}
 			}
-		}*/
-		
+		}
+
+		for(int i = 0; i < objectPairs.GetLength(1); i++)
+		{
+			objectPairs[0, i].linkedPortal = objectPairs[1, i];
+			objectPairs[1, i].linkedPortal = objectPairs[0, i];
+			objectPairs[1, i].Rotate();
+		}
+		return true;
 
 
 
