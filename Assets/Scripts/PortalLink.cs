@@ -11,7 +11,7 @@ public class PortalLink : MonoBehaviour
 
 	private Portal[] tempArray;
 
-	List<Portal> portalList = new();
+	//List<Portal> portalList = new();
 
 	private string[,] pairs;
 	
